@@ -30,7 +30,7 @@ export default function HomePage() {
           </p>
           
           <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
-            <a href='#about' className="neon-glow group relative w-40 rounded-lg bg-primary/10 px-6 py-3">
+            <a href="#about" className="neon-glow group relative w-40 rounded-lg bg-primary/10 px-6 py-3">
               <span className="neon-text relative z-10 text-primary transition-all duration-500 group-hover:text-primary-foreground">
                 About Me
               </span>
