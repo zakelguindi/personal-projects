@@ -16,6 +16,29 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,hsl(var(--primary)/_0.1),transparent_70%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,hsl(var(--secondary)/_0.1),transparent_50%)]" />
         </div>
+
+        <div className="absolute top-4 right-4 z-10">
+          <Link
+            href="/login"
+            className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/20 transition-colors"
+          >
+            
+            <span>Zak&apos;s Login</span>
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </Link>
+        </div>
         
         <div className="relative z-10 max-w-4xl text-center">
           <h1 className="text-shimmer mb-6 text-6xl font-bold tracking-tighter leading-[1.15] pb-1 sm:text-8xl sm:leading-[1.15] sm:pb-2">
@@ -26,7 +49,7 @@ export default function HomePage() {
             <span className="mx-3 text-muted-foreground">×</span>
             <span className="neon-text text-secondary">Designer</span>
             <span className="mx-3 text-muted-foreground">×</span>
-            <span className="neon-text text-accent">Creator</span>
+            <span className="neon-text text-accent">Engineer</span>
           </p>
           
           <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
@@ -136,25 +159,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
-        <div className="fixed top-0 left-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          <Link
-            href="/login"
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          >
-            <h2 className="mb-2 text-2xl font-semibold">
-              Zak Login{' '}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                →
-              </span>
-            </h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              For Zak Only
-            </p>
-          </Link>
-        </div>
-      </div>
 
       
     </main>
