@@ -8,7 +8,7 @@ interface ProjectFormProps {
     id: string
     name: string
     description: string
-    languages: string
+    languages: string[]
     github_link: string
     deployment_link: string
     project_media: string
@@ -21,7 +21,7 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
     description: initialData?.description || '',
-    languages: initialData?.languages || '',
+    languages: initialData?.languages?.join(', ') || '',
     github_link: initialData?.github_link || '',
     deployment_link: initialData?.deployment_link || '',
     project_media: initialData?.project_media || '',
@@ -44,12 +44,12 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
       let mediaUrl = formData.project_media
 
       if (mediaFile) {
-        // Upload media file
+        // Upload media file to Supabase storage
         const fileExt = mediaFile.name.split('.').pop()
         const fileName = `${Math.random()}.${fileExt}`
         const filePath = `project-media/${fileName}`
 
-        const { error: uploadError, data } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from('projects')
           .upload(filePath, mediaFile)
 
@@ -66,7 +66,8 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
       const projectData = {
         ...formData,
         project_media: mediaUrl,
-        languages: formData.languages.split(',').map(lang => lang.trim()),
+        // Convert comma-separated string to array and clean up whitespace
+        languages: formData.languages.split(',').map(lang => lang.trim()).filter(Boolean),
         user_id: session.user.id
       }
 

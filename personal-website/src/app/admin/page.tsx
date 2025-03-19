@@ -274,7 +274,7 @@ export default function AdminPage() {
         title={editingProject ? 'Edit Project' : 'Create Project'}
       >
         <ProjectForm
-          initialData={editingProject || undefined}
+          initialData={editingProject as Project || undefined}
           onSuccess={handleFormSuccess}
           onCancel={handleModalClose}
         />
