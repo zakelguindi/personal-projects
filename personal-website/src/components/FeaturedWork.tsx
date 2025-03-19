@@ -1,0 +1,119 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabase'
+import Image from 'next/image'
+import Link from 'next/link'
+
+interface Project {
+  id: string
+  name: string
+  description: string
+  languages: string[]
+  project_media: string
+  github_link: string
+  deployment_link: string
+  created_at: string
+}
+
+export default function FeaturedWork() {
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('created_at', { ascending: false })
+
+        if (error) throw error
+        setProjects(data || [])
+      } catch (error) {
+        console.error('Error fetching projects:', error)
+        setError(error instanceof Error ? error.message : 'Failed to fetch projects')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProjects()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center text-muted-foreground">Loading projects...</div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center text-destructive">Error: {error}</div>
+      </div>
+    )
+  }
+
+  return (
+    <section className="container mx-auto px-4 py-12">
+      <h2 className="text-3xl font-bold mb-8">Featured Work</h2>
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className="group relative overflow-hidden rounded-lg border bg-card transition-colors hover:bg-accent/5"
+          >
+            {project.project_media && (
+              <div className="relative aspect-video overflow-hidden">
+                <Image
+                  src={project.project_media}
+                  alt={project.name}
+                  fill
+                  className="object-cover transition-transform group-hover:scale-105"
+                />
+              </div>
+            )}
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
+              <p className="text-muted-foreground mb-4 line-clamp-2">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.languages.map((lang) => (
+                  <span
+                    key={lang}
+                    className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                  >
+                    {lang}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-4">
+                <Link
+                  href={project.github_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline"
+                >
+                  GitHub →
+                </Link>
+                <Link
+                  href={project.deployment_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline"
+                >
+                  Live Demo →
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+} 

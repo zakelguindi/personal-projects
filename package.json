@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.2",
+    "ts-node": "^10.9.2"
+  }
+}

@@ -2,6 +2,8 @@ import * as React from "react"
 import ContactForm from "./components/ContactForm"
 import { metadata } from "./metadata"
 import DeskAnimation from './components/DeskAnimation'
+import Link from 'next/link'
+import FeaturedWork from '@/components/FeaturedWork'
 
 export { metadata }
 
@@ -95,55 +97,8 @@ export default function HomePage() {
       </section>
 
       {/* Projects Section */}
-      <section id="work" className="relative py-32">
-        <div className="container mx-auto px-4">
-          <h2 className="neon-text-intense mb-16 text-center text-4xl font-bold text-primary">Featured Work</h2>
-          
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Project Card 1 */}
-            <article className="group">
-              <div className="glass-card relative aspect-[4/3] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 p-6">
-                  <div className="flex h-full flex-col justify-end">
-                    <h3 className="neon-text mb-2 text-xl font-semibold text-primary">Project One</h3>
-                    <p className="text-muted-foreground">
-                      A cutting-edge application showcasing the future of web development.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            {/* Project Card 2 */}
-            <article className="group">
-              <div className="glass-card relative aspect-[4/3] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 p-6">
-                  <div className="flex h-full flex-col justify-end">
-                    <h3 className="neon-text mb-2 text-xl font-semibold text-secondary">Project Two</h3>
-                    <p className="text-muted-foreground">
-                      Pushing the boundaries of modern UI/UX with innovative solutions.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            {/* Project Card 3 */}
-            <article className="group">
-              <div className="glass-card relative aspect-[4/3] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 p-6">
-                  <div className="flex h-full flex-col justify-end">
-                    <h3 className="neon-text mb-2 text-xl font-semibold text-accent">Project Three</h3>
-                    <p className="text-muted-foreground">
-                      Exploring the intersection of design and technology.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+      {/* Featured Work Section */}
+      <FeaturedWork />
 
       {/* Contact Section */}
       <section id="contact" className="relative py-32">
@@ -178,6 +133,27 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
+        <div className="fixed top-0 left-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+          <Link
+            href="/login"
+            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          >
+            <h2 className="mb-2 text-2xl font-semibold">
+              Zak's Login{' '}
+              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                →
+              </span>
+            </h2>
+            <p className="m-0 max-w-[30ch] text-sm opacity-50">
+              For Zak Only
+            </p>
+          </Link>
+        </div>
+      </div>
+
+      
     </main>
   );
 } 
