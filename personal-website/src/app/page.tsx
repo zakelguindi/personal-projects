@@ -62,11 +62,11 @@ export default function HomePage() {
             <div className="space-y-6">
               <h2 className="neon-text-intense text-3xl font-bold text-primary">About Me</h2>
               <p className="text-lg text-muted-foreground">
-                I'm a passionate developer focused on creating cutting-edge digital experiences.
+                I am a passionate developer focused on creating cutting-edge digital experiences.
                 With expertise in modern web technologies, I bring ideas to life through clean code
                 and innovative design solutions.
-                As a graduating student, I'm always looking for new challenges and opportunities to grow. My current 
-                focus is growing my skills in modern web development, building real-life solutions using LLM's and 
+                As a graduating student, I am always looking for new challenges and opportunities to grow. My current 
+                focus is growing my skills in modern web development, building real-life solutions using LLMs and 
                 creating engaging user experiences.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -141,7 +141,7 @@ export default function HomePage() {
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           >
             <h2 className="mb-2 text-2xl font-semibold">
-              Zak's Login{' '}
+              Zak Login{' '}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 →
               </span>
