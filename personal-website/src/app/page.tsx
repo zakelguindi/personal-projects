@@ -98,7 +98,10 @@ export default function HomePage() {
 
       {/* Projects Section */}
       {/* Featured Work Section */}
-      <FeaturedWork />
+      <section id="work" className="relative py-32">
+        <FeaturedWork />
+      </section>
+      
 
       {/* Contact Section */}
       <section id="contact" className="relative py-32">

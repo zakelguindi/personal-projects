@@ -20,6 +20,7 @@ export default function FeaturedWork() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -41,6 +42,29 @@ export default function FeaturedWork() {
 
     fetchProjects()
   }, [])
+
+  const toggleDescription = (projectId: string) => {
+    setExpandedDescriptions(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(projectId)) {
+        newSet.delete(projectId)
+      } else {
+        newSet.add(projectId)
+      }
+      return newSet
+    })
+  }
+
+  const getLanguageTagColor = (index: number) => {
+    const colors = [
+      'bg-primary/10 text-primary',
+      'bg-secondary/10 text-secondary',
+      'bg-accent/10 text-accent',
+      'bg-destructive/10 text-destructive',
+      'bg-muted/10 text-muted-foreground'
+    ]
+    return colors[index % colors.length]
+  }
 
   if (loading) {
     return (
@@ -79,14 +103,26 @@ export default function FeaturedWork() {
             )}
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
-              <p className="text-muted-foreground mb-4 line-clamp-2">
-                {project.description}
-              </p>
+              <div className="relative">
+                <p className={`text-muted-foreground mb-2 transition-all duration-300 ${
+                  expandedDescriptions.has(project.id) ? '' : 'line-clamp-2'
+                }`}>
+                  {project.description}
+                </p>
+                {project.description.length > 100 && (
+                  <button
+                    onClick={() => toggleDescription(project.id)}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors -mt-1 mb-4"
+                  >
+                    {expandedDescriptions.has(project.id) ? 'Show less' : 'Read more'}
+                  </button>
+                )}
+              </div>
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.languages.map((lang) => (
+                {project.languages.map((lang, index) => (
                   <span
                     key={lang}
-                    className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                    className={`rounded-full px-2 py-1 text-xs ${getLanguageTagColor(index)}`}
                   >
                     {lang}
                   </span>
