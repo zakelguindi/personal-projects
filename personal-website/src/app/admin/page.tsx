@@ -12,11 +12,10 @@ interface Project {
   id: string
   name: string
   description: string
-  languages: string
+  languages: string[]
+  project_media: string
   github_link: string
   deployment_link: string
-  project_media: string
-  created_at: string
 }
 
 export default function AdminPage() {
@@ -182,25 +181,14 @@ export default function AdminPage() {
                       {project.description}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-2">
-                      {Array.isArray(project.languages)
-                        ? project.languages.map((lang) => (
-                            <span
-                              key={lang}
-                              className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
-                            >
-                              {lang.trim()}
-                            </span>
-                          ))
-                        : typeof project.languages === "string"
-                        ? project.languages.split(",").map((lang) => (
-                            <span
-                              key={lang}
-                              className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
-                            >
-                              {lang.trim()}
-                            </span>
-                          ))
-                        : null}
+                      {project.languages.map((lang) => (
+                        <span
+                          key={lang}
+                          className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                        >
+                          {lang.trim()}
+                        </span>
+                      ))}
                     </div>
 
                   </div>
