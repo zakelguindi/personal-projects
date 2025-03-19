@@ -54,7 +54,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </button>
+          </button>  
         </div>
         <div className="mt-6">{children}</div>
       </div>
