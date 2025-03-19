@@ -135,7 +135,7 @@ export default function FeaturedWork() {
                   rel="noopener noreferrer"
                   className="text-sm text-primary hover:underline"
                 >
-                  GitHub →
+                  GitHub Repository →
                 </Link>
                 <Link
                   href={project.deployment_link}
@@ -143,7 +143,7 @@ export default function FeaturedWork() {
                   rel="noopener noreferrer"
                   className="text-sm text-primary hover:underline"
                 >
-                  Live Demo →
+                  Project Link →
                 </Link>
               </div>
             </div>
