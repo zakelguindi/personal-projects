@@ -10,10 +10,10 @@ import ProjectForm from "@/components/ProjectForm"
 
 interface Project {
   id: string
+  project_id: string
   name: string
   description: string
   languages: string[]
-  project_media: string
   github_link: string
   deployment_link: string
 }
@@ -49,7 +49,7 @@ export default function AdminPage() {
   const fetchProjects = async () => {
     try {
       const { data, error } = await supabase
-        .from('projects')
+        .from('p1_projects_data')
         .select('*')
         .order('created_at', { ascending: false })
 
@@ -68,7 +68,7 @@ export default function AdminPage() {
 
     try {
       const { error } = await supabase
-        .from('projects')
+        .from('p1_projects_data')
         .delete()
         .eq('id', id)
 

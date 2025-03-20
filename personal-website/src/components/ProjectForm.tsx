@@ -6,12 +6,12 @@ import { supabase } from '@/lib/supabase'
 interface ProjectFormProps {
   initialData?: {
     id: string
+    project_id: string
     name: string
     description: string
     languages: string[]
     github_link: string
     deployment_link: string
-    project_media: string
   }
   onSuccess: () => void
   onCancel: () => void
@@ -24,9 +24,8 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
     languages: initialData?.languages?.join(', ') || '',
     github_link: initialData?.github_link || '',
     deployment_link: initialData?.deployment_link || '',
-    project_media: initialData?.project_media || '',
+    project_id: initialData?.project_id || process.env.NEXT_PUBLIC_PROJECT_ID || '',
   })
-  const [mediaFile, setMediaFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -41,31 +40,10 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
       if (sessionError) throw sessionError
       if (!session) throw new Error('No authenticated user')
 
-      let mediaUrl = formData.project_media
-
-      if (mediaFile) {
-        // Upload media file to Supabase storage
-        const fileExt = mediaFile.name.split('.').pop()
-        const fileName = `${Math.random()}.${fileExt}`
-        const filePath = `project-media/${fileName}`
-
-        const { error: uploadError } = await supabase.storage
-          .from('projects')
-          .upload(filePath, mediaFile)
-
-        if (uploadError) throw uploadError
-
-        // Get public URL
-        const { data: { publicUrl } } = supabase.storage
-          .from('projects')
-          .getPublicUrl(filePath)
-
-        mediaUrl = publicUrl
-      }
+      
 
       const projectData = {
         ...formData,
-        project_media: mediaUrl,
         // Convert comma-separated string to array and clean up whitespace
         languages: formData.languages.split(',').map(lang => lang.trim()).filter(Boolean),
         user_id: session.user.id
@@ -73,7 +51,7 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
 
       if (initialData) {
         const { error: updateError } = await supabase
-          .from('projects')
+          .from('p1_projects_data')
           .update(projectData)
           .eq('id', initialData.id)
           .eq('user_id', session.user.id)
@@ -81,7 +59,7 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
         if (updateError) throw updateError
       } else {
         const { error: insertError } = await supabase
-          .from('projects')
+          .from('p1_projects_data')
           .insert([projectData])
 
         if (insertError) throw insertError
@@ -90,7 +68,11 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
       onSuccess()
     } catch (error) {
       console.error('Project save error:', error)
-      setError(error instanceof Error ? error.message : 'Failed to save project')
+      if (error instanceof Error) {
+        setError(`Error: ${error.message}`)
+      } else {
+        setError(`Failed to save project: ${JSON.stringify(error)}`)
+      }
     } finally {
       setLoading(false)
     }
@@ -144,32 +126,6 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
           value={formData.languages}
           onChange={(e) => setFormData({ ...formData, languages: e.target.value })}
         />
-      </div>
-
-      <div>
-        <label htmlFor="media" className="block text-sm font-medium text-foreground">
-          Media Upload
-        </label>
-        <input
-          type="file"
-          id="media"
-          accept="image/*,video/*"
-          className="mt-1 block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
-          onChange={(e) => setMediaFile(e.target.files?.[0] || null)}
-        />
-        {formData.project_media && (
-          <div className="mt-2">
-            <p className="text-sm text-muted-foreground">Current media:</p>
-            <a
-              href={formData.project_media}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-primary hover:underline"
-            >
-              View current media
-            </a>
-          </div>
-        )}
       </div>
 
       <div>

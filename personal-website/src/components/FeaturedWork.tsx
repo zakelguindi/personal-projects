@@ -7,10 +7,10 @@ import Link from 'next/link'
 
 interface Project {
   id: string
+  project_id: string
   name: string
   description: string
   languages: string[]
-  project_media: string
   github_link: string
   deployment_link: string
   created_at: string
@@ -26,7 +26,7 @@ export default function FeaturedWork() {
     const fetchProjects = async () => {
       try {
         const { data, error } = await supabase
-          .from('projects')
+          .from('p1_projects_data')
           .select('*')
           .order('created_at', { ascending: false })
 
@@ -91,18 +91,9 @@ export default function FeaturedWork() {
             key={project.id}
             className="group relative overflow-hidden rounded-lg border bg-card transition-colors hover:bg-accent/5"
           >
-            {project.project_media && (
-              <div className="relative aspect-video overflow-hidden">
-                <Image
-                  src={project.project_media}
-                  alt={project.name}
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105"
-                />
-              </div>
-            )}
             <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
+              <h3 className="text-xl font-semibold">{project.name}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>
               <div className="relative">
                 <p className={`text-muted-foreground mb-2 transition-all duration-300 ${
                   expandedDescriptions.has(project.id) ? '' : 'line-clamp-2'
