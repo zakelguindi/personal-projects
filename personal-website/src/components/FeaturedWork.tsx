@@ -93,7 +93,7 @@ export default function FeaturedWork() {
           >
             <div className="p-6">
               <h3 className="text-xl font-semibold">{project.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>
+              {/* <p className="mt-2 text-sm text-muted-foreground">{project.description}</p> */}
               <div className="relative">
                 <p className={`text-muted-foreground mb-2 transition-all duration-300 ${
                   expandedDescriptions.has(project.id) ? '' : 'line-clamp-2'
