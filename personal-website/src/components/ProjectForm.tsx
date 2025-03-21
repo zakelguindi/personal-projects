@@ -24,7 +24,7 @@ export default function ProjectForm({ initialData, onSuccess, onCancel }: Projec
     languages: initialData?.languages?.join(', ') || '',
     github_link: initialData?.github_link || '',
     deployment_link: initialData?.deployment_link || '',
-    project_id: initialData?.project_id || process.env.NEXT_PUBLIC_PROJECT_ID || '',
+    project_id: initialData?.project_id || 'fdd50bae-a28b-4f7f-b7a6-adbd89ef78bf', // Hardcode the default project_id
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
