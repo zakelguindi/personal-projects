@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coffee Shop Finder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Coffee Shop Finder</h1>
+            <div class="search-container">
+                <div class="location-input">
+                    <input type="text" id="locationSearch" placeholder="Enter city name">
+                    <div id="searchSuggestions" class="suggestions-dropdown"></div>
+                </div>
+                <button id="searchBtn">Search</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div id="cardContainer" class="card-container">
+                <div id="loading" class="hidden">Loading...</div>
+                <div id="noResults" class="hidden">No coffee shops found in this area.</div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button id="likedShopsBtn" class="nav-button">
+                <i class="fas fa-heart"></i>
+                <span>Liked Shops</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Visit Confirmation Modal -->
+    <div id="visitModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Did you visit this coffee shop?</h3>
+            <div class="modal-buttons">
+                <button id="yesVisitBtn">Yes</button>
+                <button id="noVisitBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div id="ratingModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Rate your experience</h3>
+            <div class="rating-stars">
+                <i class="fas fa-star" data-rating="1"></i>
+                <i class="fas fa-star" data-rating="2"></i>
+                <i class="fas fa-star" data-rating="3"></i>
+                <i class="fas fa-star" data-rating="4"></i>
+                <i class="fas fa-star" data-rating="5"></i>
+            </div>
+            <button id="submitRatingBtn">Submit Rating</button>
+        </div>
+    </div>
+
+    <!-- Liked Shops Modal -->
+    <div id="likedShopsModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Liked Coffee Shops</h3>
+            <div id="likedShopsList"></div>
+            <button id="closeLikedShopsBtn">Close</button>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html> 

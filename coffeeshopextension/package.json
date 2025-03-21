@@ -1,0 +1,22 @@
+{
+  "name": "coffee-shop-finder",
+  "version": "1.0.0",
+  "description": "A Chrome extension to find and rate coffee shops",
+  "main": "background.js",
+  "scripts": {
+    "generate-icons": "node icons/generate_icons.js",
+    "build": "node build.js && npm run generate-icons",
+    "dev": "npm run build && npm run watch",
+    "watch": "nodemon --watch .env --watch popup.js --watch background.js --watch auth.js --watch login.js --exec 'npm run build'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.237"
+  },
+  "author": "",
+  "license": "MIT"
+}
