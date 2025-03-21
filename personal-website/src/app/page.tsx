@@ -85,10 +85,10 @@ export default function HomePage() {
             <div className="space-y-6">
               <h2 className="neon-text-intense text-3xl font-bold text-primary">About Me</h2>
               <p className="text-lg text-muted-foreground">
-                I am a passionate developer focused on creating cutting-edge digital experiences.
+                I&apos;m a 21 year old software developer focused on creating cutting-edge digital experiences.
                 With expertise in modern web technologies, I bring ideas to life through clean code
                 and innovative design solutions.
-                As a graduating student, I am always looking for new challenges and opportunities to grow. My current 
+                As a graduating student, I&apos;m always looking for new challenges and opportunities to grow. My current 
                 focus is growing my skills in modern web development, building real-life solutions using LLMs and 
                 creating engaging user experiences.
               </p>
