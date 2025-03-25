@@ -1,0 +1,16 @@
+{
+    "video_settings": {
+        "max_duration": 60,
+        "target_resolution": {
+            "width": 1080,
+            "height": 1920
+        },
+        "watermark_path": "../assets/watermark.png"
+    },
+    "tiktok": {
+        "upload_frequency": "daily"
+    },
+    "logging": {
+        "log_file": "logs/automation.log"
+    }
+} 

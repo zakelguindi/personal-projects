@@ -1,0 +1,31 @@
+{
+    "api_keys": {
+        "openrouter": "test_openrouter_key",
+        "pexels": "test_pexels_key"
+    },
+    "video_settings": {
+        "max_duration": 30,
+        "target_resolution": {
+            "width": 1080,
+            "height": 1920
+        },
+        "watermark_path": "../assets/test_watermark.png"
+    },
+    "content_sources": {
+        "youtube_channels": [
+            "test_channel_id"
+        ],
+        "search_queries": [
+            "test query"
+        ]
+    },
+    "tiktok": {
+        "username": "test_user",
+        "password": "test_pass",
+        "upload_frequency": "daily"
+    },
+    "logging": {
+        "google_sheet_id": "test_sheet_id",
+        "log_file": "test_logs/test.log"
+    }
+} 
